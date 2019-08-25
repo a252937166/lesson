@@ -1,4 +1,4 @@
-package com.ouyang.lession.model;
+package com.ouyang.lesson.model;
 
 import java.io.Serializable;
 

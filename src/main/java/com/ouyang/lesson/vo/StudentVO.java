@@ -1,4 +1,4 @@
-package com.ouyang.lession.vo;
+package com.ouyang.lesson.vo;
 
 import lombok.Data;
 
