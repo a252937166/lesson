@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ouyang.lesson.dao.MybatisRefDAO">
+  <resultMap id="BaseResultMap" type="com.ouyang.lesson.model.MybatisRef">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="string_col" jdbcType="VARCHAR" property="stringCol" />
+    <result column="boolean_col" jdbcType="BIT" property="booleanCol" />
+    <result column="date_col" jdbcType="TIMESTAMP" property="dateCol" />
+    <result column="time_col" jdbcType="TIMESTAMP" property="timeCol" />
+    <result column="int_col" jdbcType="INTEGER" property="intCol" />
+    <result column="long_col" jdbcType="BIGINT" property="longCol" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, string_col, boolean_col, date_col, time_col, int_col, long_col
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mybatis_ref
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mybatis_ref
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ouyang.lesson.model.MybatisRef">
+    insert into mybatis_ref (id, string_col, boolean_col, 
+      date_col, time_col, int_col, 
+      long_col)
+    values (#{id,jdbcType=INTEGER}, #{stringCol,jdbcType=VARCHAR}, #{booleanCol,jdbcType=BIT}, 
+      #{dateCol,jdbcType=TIMESTAMP}, #{timeCol,jdbcType=TIMESTAMP}, #{intCol,jdbcType=INTEGER}, 
+      #{longCol,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ouyang.lesson.model.MybatisRef">
+    insert into mybatis_ref
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stringCol != null">
+        string_col,
+      </if>
+      <if test="booleanCol != null">
+        boolean_col,
+      </if>
+      <if test="dateCol != null">
+        date_col,
+      </if>
+      <if test="timeCol != null">
+        time_col,
+      </if>
+      <if test="intCol != null">
+        int_col,
+      </if>
+      <if test="longCol != null">
+        long_col,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stringCol != null">
+        #{stringCol,jdbcType=VARCHAR},
+      </if>
+      <if test="booleanCol != null">
+        #{booleanCol,jdbcType=BIT},
+      </if>
+      <if test="dateCol != null">
+        #{dateCol,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeCol != null">
+        #{timeCol,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intCol != null">
+        #{intCol,jdbcType=INTEGER},
+      </if>
+      <if test="longCol != null">
+        #{longCol,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ouyang.lesson.model.MybatisRef">
+    update mybatis_ref
+    <set>
+      <if test="stringCol != null">
+        string_col = #{stringCol,jdbcType=VARCHAR},
+      </if>
+      <if test="booleanCol != null">
+        boolean_col = #{booleanCol,jdbcType=BIT},
+      </if>
+      <if test="dateCol != null">
+        date_col = #{dateCol,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeCol != null">
+        time_col = #{timeCol,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intCol != null">
+        int_col = #{intCol,jdbcType=INTEGER},
+      </if>
+      <if test="longCol != null">
+        long_col = #{longCol,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ouyang.lesson.model.MybatisRef">
+    update mybatis_ref
+    set string_col = #{stringCol,jdbcType=VARCHAR},
+      boolean_col = #{booleanCol,jdbcType=BIT},
+      date_col = #{dateCol,jdbcType=TIMESTAMP},
+      time_col = #{timeCol,jdbcType=TIMESTAMP},
+      int_col = #{intCol,jdbcType=INTEGER},
+      long_col = #{longCol,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectById" resultType="com.ouyang.lesson.model.MybatisRef">
+    select
+    id, string_col as 'stringCol', boolean_col as 'booleanCol', date_col as 'dateCol', time_col as 'timeCol', int_col as 'intCol', long_col as 'longCol'
+    from mybatis_ref
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from mybatis_ref
+    where 1 = 1
+    <if test="ids != null and ids.size() > 0">
+    and
+      id in
+      <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+        #{id}
+      </foreach>
+    </if>
+  </select>
+</mapper>
