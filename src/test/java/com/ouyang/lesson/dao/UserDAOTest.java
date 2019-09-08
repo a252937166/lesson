@@ -1,6 +1,8 @@
 package com.ouyang.lesson.dao;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ouyang.lesson.LessionApplicationTests;
 import com.ouyang.lesson.model.User;
 import org.junit.Assert;
@@ -21,7 +23,6 @@ public class UserDAOTest extends LessionApplicationTests {
     @Test
     public void testSelect() {
         User user = userDAO.selectById(1);
-
         Assert.assertNotNull(user);
         System.out.println(user);
     }
@@ -44,6 +45,21 @@ public class UserDAOTest extends LessionApplicationTests {
         for (User u : list) {
             System.out.println(u);
         }
+    }
+
+    @Test
+    public void pageHelperTest() {
+        //获取第二页的两条信息
+        PageHelper.startPage(2,2);
+        List<User> list = userDAO.selectList(null);
+        Assert.assertFalse(CollectionUtils.isEmpty(list));
+        for (User u : list) {
+            System.out.println(u);
+        }
+        //获取分页信息
+        PageInfo<User> pageInfo = new PageInfo<>(list);
+        Assert.assertNotNull(pageInfo);
+        System.out.println(pageInfo);
     }
 
 }
