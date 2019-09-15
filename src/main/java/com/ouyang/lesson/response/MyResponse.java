@@ -15,4 +15,26 @@ public class MyResponse<T> {
     private String code;
     private String msg;
     private T data;
+
+    public static MyResponse fail (String msg) {
+        MyResponse myResponse = new MyResponse(ResponseEnum.FAIL);
+        myResponse.setMsg(msg);
+        return myResponse;
+    }
+
+    public static MyResponse success (String msg) {
+        MyResponse myResponse = new MyResponse(ResponseEnum.SUCCESS);
+        myResponse.setMsg(msg);
+        return myResponse;
+    }
+
+    public static MyResponse fail () {
+        MyResponse myResponse = new MyResponse(ResponseEnum.FAIL);
+        return myResponse;
+    }
+
+    public static MyResponse success () {
+        MyResponse myResponse = new MyResponse(ResponseEnum.SUCCESS);
+        return myResponse;
+    }
 }
