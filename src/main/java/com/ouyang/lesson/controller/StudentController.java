@@ -1,11 +1,14 @@
 package com.ouyang.lesson.controller;
 
-import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
+import com.ouyang.lesson.model.Student;
 import com.ouyang.lesson.service.StudentService;
 import com.ouyang.lesson.vo.StudentVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,9 +40,12 @@ public class StudentController {
     }
 
     @RequestMapping("/getPage")
-    public Page<StudentVO> getPage(@RequestParam("pageNo") Integer pageNo,@RequestParam("pageSize") Integer pageSize) {
-        Page<StudentVO> list = studentService.getPage(pageNo,pageSize);
-        return list;
+    public PageInfo<Student> getPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize) {
+        return studentService.getPage(pageNo,pageSize);
     }
 
+    @PostMapping("/insert")
+    public Integer getPage(@RequestBody Student student) {
+        return studentService.insert(student);
+    }
 }

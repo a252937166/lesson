@@ -10,6 +10,7 @@ import com.ouyang.lesson.vo.StudentVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class StudentServiceImpl implements StudentService {
         List<StudentVO> vos = new ArrayList<>();
         for (Student student : list) {
             StudentVO studentVO = new StudentVO();
-            BeanUtils.copyProperties(student,studentVO);
+            BeanUtils.copyProperties(student, studentVO);
             studentVO.setGender(student.getGender() ? "男" : "女");
             vos.add(studentVO);
         }
@@ -46,28 +47,27 @@ public class StudentServiceImpl implements StudentService {
     public StudentVO findById(Integer id) {
         Student student = studentDAO.selectByPrimaryKey(id);
         StudentVO studentVO = new StudentVO();
-        BeanUtils.copyProperties(student,studentVO);
+        BeanUtils.copyProperties(student, studentVO);
         studentVO.setGender(student.getGender() ? "男" : "女");
         return studentVO;
     }
 
     @Override
-    @Cacheable(value = "students",key = "#pageNo+'_'+#pageSize")
-    public Page<StudentVO> getPage(Integer pageNo, Integer pageSize) {
+    @Cacheable(value = "students", key = "#pageNo+'_'+#pageSize")
+    public PageInfo<Student> getPage(Integer pageNo, Integer pageSize) {
         log.info("使用数据库查询");
-        PageHelper.startPage(pageNo,pageSize);
+        PageHelper.startPage(pageNo, pageSize);
         List<Student> students = studentDAO.findAll();
-        Page<StudentVO>  page = new Page<>();
-        for (Student u : students) {
-            StudentVO vo = new StudentVO();
-            BeanUtils.copyProperties(u,vo);
-            vo.setGender(u.getGender() ? "男" : "女");
-            page.add(vo);
-        }
+        Page<Student> page = new Page<>();
         //获取分页信息
         PageInfo<Student> pageInfo = new PageInfo<>(students);
-        page.setTotal(pageInfo.getTotal());
-        return page;
+        return pageInfo;
+    }
+
+    @Override
+    @CacheEvict(value = "students", allEntries = true)
+    public Integer insert(Student student) {
+        return studentDAO.insert(student);
     }
 
 

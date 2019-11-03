@@ -65,7 +65,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     /**
-     * 保存一个月
+     * 保存五秒
      * @param factory RedisConnectionFactory
      * @return CacheManager
      */

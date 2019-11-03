@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class LessonApplication {
 
     public static void main(String[] args) {
+        System.setProperty("es.set.netty.runtime.available.processors","false");
         SpringApplication.run(LessonApplication.class, args);
     }
 
