@@ -1,5 +1,6 @@
 package com.ouyang.lesson.service;
 
+import com.github.pagehelper.Page;
 import com.ouyang.lesson.vo.StudentVO;
 
 import java.util.List;
@@ -22,4 +23,5 @@ public interface StudentService {
      */
     StudentVO findById(Integer id);
 
+    Page<StudentVO> getPage(Integer pageNo, Integer pageSize);
 }
