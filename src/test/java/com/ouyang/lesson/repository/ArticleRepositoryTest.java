@@ -21,6 +21,11 @@ import java.util.Optional;
  * @date 2019/9/21 18:17
  */
 public class ArticleRepositoryTest extends LessionApplicationTests {
+
+    public ArticleRepositoryTest() {
+        System.setProperty("es.set.netty.runtime.available.processors", "false");
+    }
+
     @Autowired
     private ArticleRepository articleRepository;
 
