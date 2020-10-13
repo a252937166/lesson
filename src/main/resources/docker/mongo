@@ -1,0 +1,2 @@
+docker network create  mongonetwork
+docker run -d --network mongonetwork --name mongo -p 27017:27017 -e TZ="Asia/Shanghai" -e MONGO_INITDB_ROOT_USERNAME=账号 -e MONGO_INITDB_ROOT_PASSWORD=密码 mongo --wiredTigerCacheSizeGB 1.5
