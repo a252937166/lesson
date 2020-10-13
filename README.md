@@ -1,5 +1,8 @@
 # lesson
 
+一些好的java学习的方法，规范java的开发模式和思考方式。
+提供最新的技术方案和完整开发示例。
+
 [Java学习路线——前篇：代码规范](https://github.com/a252937166/lesson/wiki/Java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E2%80%94%E2%80%94%E5%89%8D%E7%AF%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83)
 
 [Java学习路线(一)——一个项目的整体结构](https://github.com/a252937166/lesson/wiki/Java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF(%E4%B8%80)%E2%80%94%E2%80%94%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84)
